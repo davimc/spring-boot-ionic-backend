@@ -1,7 +1,6 @@
 package com.davimc.cursomc.domain;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
