@@ -17,17 +17,8 @@ public class PagamentoBoleto extends Pagamento {
     public PagamentoBoleto() {
     }
 
-    public PagamentoBoleto(EstadoPagamento estadoPagamento, Pedido pedido) {
-        super(estadoPagamento, pedido);
-    }
-
-    public PagamentoBoleto(Date dataVencimento, Date dataPagamento) {
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
-    }
-
-    public PagamentoBoleto(EstadoPagamento estadoPagamento, Pedido pedido, Date dataVencimento, Date dataPagamento) {
-        super(estadoPagamento, pedido);
+    public PagamentoBoleto(Long id, EstadoPagamento estadoPagamento, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+        super(id, estadoPagamento, pedido);
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
     }

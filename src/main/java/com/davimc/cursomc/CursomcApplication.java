@@ -57,12 +57,12 @@ public class CursomcApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
-		Estado est1 = new Estado("Minas Gerais");
-		Estado est2 = new Estado("São Paulo");
+		Estado est1 = new Estado(null,"Minas Gerais");
+		Estado est2 = new Estado(null,"São Paulo");
 
-		Cidade c1 = new Cidade("Uberlândia", est1);
-		Cidade c2 = new Cidade("São Paulo", est2);
-		Cidade c3 = new Cidade("Campinas", est2);
+		Cidade c1 = new Cidade(null,"Uberlândia", est1);
+		Cidade c2 = new Cidade(null,"São Paulo", est2);
+		Cidade c3 = new Cidade(null,"Campinas", est2);
 
 		est1.setCidades(Arrays.asList(c1));
 		est2.setCidades(Arrays.asList(c2,c3));
@@ -70,10 +70,10 @@ public class CursomcApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 
-		Cliente cli1 = new Cliente("Maria Silva", "maria@gmail.com","3637891277", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null,"Maria Silva", "maria@gmail.com","3637891277", TipoCliente.PESSOAFISICA);
 
-		Endereco e1 = new Endereco("Rua Flores", "300","Apto 203", "Jardim", "3865429",cli1, c1);
-		Endereco e2 = new Endereco("Avenida Matos", "105","Sala 800", "Centro", "5650321",cli1, c2);
+		Endereco e1 = new Endereco(null,"Rua Flores", "300","Apto 203", "Jardim", "3865429",cli1, c1);
+		Endereco e2 = new Endereco(null,"Avenida Matos", "105","Sala 800", "Centro", "5650321",cli1, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		cli1.getTelefone().addAll(Set.of("372584333","98259855"));
@@ -82,11 +82,11 @@ public class CursomcApplication implements CommandLineRunner {
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Pedido ped1 = new Pedido(sdf.parse("30/09/2017 10:32"), cli1,e1);
-		Pedido ped2 = new Pedido(sdf.parse("10/10/2017 19:35"), cli1,e2);
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"),cli1,e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"),cli1,e2);
 
-		Pagamento pagto1 = new PagamentoCartao(EstadoPagamento.QUITADO,ped1,6);
-		Pagamento pagto2 = new PagamentoBoleto(EstadoPagamento.PENDENTE,ped2,sdf.parse("20/10/2017 00:00"), null);
+		Pagamento pagto1 = new PagamentoCartao(null,EstadoPagamento.QUITADO,ped1,6);
+		Pagamento pagto2 = new PagamentoBoleto(null,EstadoPagamento.PENDENTE,ped2,sdf.parse("20/10/2017 00:00"), null);
 
 		ped1.setPagamento(pagto1);
 		ped2.setPagamento(pagto2);
