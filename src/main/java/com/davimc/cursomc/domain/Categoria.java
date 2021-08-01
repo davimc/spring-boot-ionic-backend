@@ -15,8 +15,6 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Preenchimento obrigatório")
-    @Size(min = 5, max = 80, message = "Deve ser entre 5 e 80 caracteres")
     private String nome;
 
     @ManyToMany(mappedBy = "categorias")
