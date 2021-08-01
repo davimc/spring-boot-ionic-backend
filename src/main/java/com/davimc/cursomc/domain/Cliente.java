@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
         this.tipo = tipo.getCod();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
