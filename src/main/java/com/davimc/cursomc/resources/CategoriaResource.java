@@ -4,6 +4,7 @@ import com.davimc.cursomc.domain.Categoria;
 import com.davimc.cursomc.dto.CategoriaDTO;
 import com.davimc.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,6 +28,16 @@ public class CategoriaResource {
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll(){
         List<CategoriaDTO> categorias = service.findAll().stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(categorias);
+    }
+    @GetMapping("/page")
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "linesPerPage", defaultValue = "24") int linesPerPage,
+            @RequestParam(name = "orderBy", defaultValue = "nome") String orderBy,
+            @RequestParam(name = "direction", defaultValue = "ASC") String direction
+    ){
+        Page<CategoriaDTO> categorias = service.findPage(page,linesPerPage,orderBy,direction).map(obj -> new CategoriaDTO(obj));
         return ResponseEntity.ok().body(categorias);
     }
     @PostMapping
