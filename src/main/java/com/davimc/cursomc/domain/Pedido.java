@@ -47,6 +47,10 @@ public class Pedido implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getInstante() {
         return instante;
     }
