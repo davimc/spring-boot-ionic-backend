@@ -1,8 +1,11 @@
 package com.davimc.cursomc.resources;
 
+import com.davimc.cursomc.domain.Categoria;
 import com.davimc.cursomc.domain.Cliente;
 import com.davimc.cursomc.domain.Cliente;
+import com.davimc.cursomc.dto.CategoriaDTO;
 import com.davimc.cursomc.dto.ClienteDTO;
+import com.davimc.cursomc.dto.ClienteNewDTO;
 import com.davimc.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +29,8 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Cliente obj){
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
+        Cliente obj = service.fromDTO(objDTO);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
