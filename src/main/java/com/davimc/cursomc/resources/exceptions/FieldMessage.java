@@ -2,13 +2,13 @@ package com.davimc.cursomc.resources.exceptions;
 
 import java.io.Serializable;
 
-public class FIeldMessage  implements Serializable {
+public class FieldMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String fieldName;
     private String message;
 
-    public FIeldMessage(String fieldName, String message) {
+    public FieldMessage(String fieldName, String message) {
 
         this.fieldName = fieldName;
         this.message = message;
