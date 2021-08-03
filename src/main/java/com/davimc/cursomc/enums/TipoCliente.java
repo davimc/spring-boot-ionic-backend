@@ -1,43 +1,38 @@
 package com.davimc.cursomc.enums;
 
 public enum TipoCliente {
-    PESSOAJURIDICA(1, "Pessoa Jurídica"),
-    PESSOAFISICA(2, "Pessoa Física");
+    PESSOAFISICA(1, "Pessoa Física"),
+    PESSOAJURIDICA(2, "Pessoa Jurídica");
 
     private int cod;
-    private String descricacao;
+    private String descricao;
 
-    TipoCliente(int cod, String descricacao) {
+    private TipoCliente(int cod, String descricao) {
         this.cod = cod;
-        this.descricacao = descricacao;
+        this.descricao = descricao;
     }
 
     public int getCod() {
         return cod;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public String getDescricao () {
+        return descricao;
     }
 
-    public String getDescricacao() {
-        return descricacao;
-    }
+    public static TipoCliente toEnum(Integer cod) {
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
-    }
-    public static TipoCliente toEnum(Integer id) {
-
-        if (id == null) {
+        if (cod == null) {
             return null;
         }
 
         for (TipoCliente x : TipoCliente.values()) {
-            if (id.equals(x.getCod())) {
+            if (cod.equals(x.getCod())) {
                 return x;
             }
         }
-        throw new IllegalArgumentException("Id inválido " + id);
+
+        throw new IllegalArgumentException("Id inválido: " + cod);
     }
+
 }
