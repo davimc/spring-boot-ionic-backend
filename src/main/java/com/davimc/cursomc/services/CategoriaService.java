@@ -27,7 +27,14 @@ public class CategoriaService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
+    public List<Categoria> findAll() {
+        return repo.findAll();
+    }
 
+    public Page<Categoria> findPage(int page, int linesPerPage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repo.findAll(pageRequest);
+    }
 
     public Categoria insert (Categoria obj) {
         return repo.save(obj);
@@ -46,15 +53,6 @@ public class CategoriaService {
         }catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Não é possível excluir uma Categoria que tenha Produto(s) associado(s)");
         }
-    }
-
-    public List<Categoria> findAll() {
-        return repo.findAll();
-    }
-
-    public Page<Categoria> findPage(int page, int linesPerPage, String orderBy, String direction){
-        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 
     public Categoria fromDTO(CategoriaDTO objDTO) {
