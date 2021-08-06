@@ -1,12 +1,15 @@
 package com.davimc.cursomc.resources;
 
+import com.davimc.cursomc.domain.Categoria;
 import com.davimc.cursomc.domain.Pedido;
+import com.davimc.cursomc.dto.CategoriaDTO;
 import com.davimc.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
