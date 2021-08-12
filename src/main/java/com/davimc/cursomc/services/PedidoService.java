@@ -40,9 +40,6 @@ public class PedidoService {
             PagamentoBoleto pgto = (PagamentoBoleto) obj.getPagamento();
             pgto.setDataPagamento(null);
             boletoService.preencherPagamentoBoleto(pgto,obj.getInstante());
-        }else{
-            PagamentoCartao pgto = (PagamentoCartao) obj.getPagamento();
-            pgto.
         }
 
         repo.save(obj);
