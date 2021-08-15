@@ -121,7 +121,6 @@ public class Pedido implements Serializable {
         sb.append(", Situação do pagamento: ");
         sb.append(getPagamento().getEstadoPagamento().getDescricacao());
         sb.append("\nDetalhes:\n");
-        System.out.println(getItems().size()+"ok");
         for(ItemPedido ip : getItems())
             sb.append(ip.toString());
         return sb.toString();
