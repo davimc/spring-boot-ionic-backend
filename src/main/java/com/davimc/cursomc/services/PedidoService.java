@@ -24,9 +24,13 @@ public class PedidoService {
     @Autowired
     private ClienteService clienteService;
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private PagamentoRepository pagamentoRepository;
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
 
 
     public Pedido find (Long id){
@@ -57,7 +61,7 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItems());
-        System.out.println(obj);
+        emailService.sendOrderConfirmationEmail(obj);
         return obj;
     }
 }
