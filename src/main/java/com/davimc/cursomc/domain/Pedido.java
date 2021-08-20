@@ -42,7 +42,7 @@ public class Pedido implements Serializable {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public Double getTotal() {
+    public Double getValorTotal() {
         Double soma = 0.0;
         for(ItemPedido it : items)
             soma += it.getSubTotal();
@@ -119,7 +119,7 @@ public class Pedido implements Serializable {
         sb.append(", Cliente: ");
         sb.append(getCliente().getNome());
         sb.append(", Situação do pagamento: ");
-        sb.append(getPagamento().getEstadoPagamento().getDescricacao());
+        sb.append(getPagamento().getEstado().getDescricao());
         sb.append("\nDetalhes:\n");
         for(ItemPedido ip : getItems())
             sb.append(ip.toString());
