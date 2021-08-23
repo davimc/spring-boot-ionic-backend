@@ -1,29 +1,53 @@
 package com.davimc.cursomc.dto;
 
 import com.davimc.cursomc.services.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message="Preenchimento obrigatório")
+    @Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
+
+    @NotEmpty(message="Preenchimento obrigatório")
+    @Email(message="Email inválido")
     private String email;
+
+    @NotEmpty(message="Preenchimento obrigatório")
     private String cpfOuCnpj;
+
     private Integer tipo;
 
+    @NotEmpty(message="Preenchimento obrigatório")
+    private String senha;
+
+    @NotEmpty(message="Preenchimento obrigatório")
     private String rua;
+
+    @NotEmpty(message="Preenchimento obrigatório")
     private String num;
+
     private String complemento;
+
     private String bairro;
+
+    @NotEmpty(message="Preenchimento obrigatório")
     private String cep;
 
-    private Long cidadeId;
-
+    @NotEmpty(message="Preenchimento obrigatório")
     private String telefone1;
+
     private String telefone2;
+
     private String telefone3;
+
+    private Long cidadeId;
 
     public ClienteNewDTO() {
     }
@@ -100,14 +124,6 @@ public class ClienteNewDTO implements Serializable {
         this.cep = cep;
     }
 
-    public Long getCidadeId() {
-        return cidadeId;
-    }
-
-    public void setCidadeId(Long cidadeId) {
-        this.cidadeId = cidadeId;
-    }
-
     public String getTelefone1() {
         return telefone1;
     }
@@ -130,5 +146,21 @@ public class ClienteNewDTO implements Serializable {
 
     public void setTelefone3(String telefone3) {
         this.telefone3 = telefone3;
+    }
+
+    public Long getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(Long cidadeId) {
+        this.cidadeId = cidadeId;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

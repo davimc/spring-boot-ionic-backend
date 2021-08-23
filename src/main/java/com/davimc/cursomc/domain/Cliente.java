@@ -20,6 +20,9 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @JsonIgnore
+    private String senha;
+
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefone = new HashSet<>();
@@ -33,10 +36,11 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(Long id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+    public Cliente(Long id, String nome, String email, String senha, String cpfOuCnpj, TipoCliente tipo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
+        this.senha = senha;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo==null? null : tipo.getCod();
     }
@@ -103,6 +107,14 @@ public class Cliente implements Serializable {
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
