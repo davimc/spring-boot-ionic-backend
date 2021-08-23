@@ -1,5 +1,6 @@
 package com.davimc.cursomc.domain;
 
+import com.davimc.cursomc.enums.Perfil;
 import com.davimc.cursomc.enums.TipoCliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente implements Serializable {
@@ -16,6 +18,7 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String cpfOuCnpj;
     private Integer tipo;
@@ -27,13 +30,21 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefone = new HashSet<>();
 
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name="PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
+
+
+
     public Cliente() {
+        setPerfis(Perfil.CLIENTE);
     }
 
     public Cliente(Long id, String nome, String email, String senha, String cpfOuCnpj, TipoCliente tipo) {
@@ -43,6 +54,8 @@ public class Cliente implements Serializable {
         this.senha = senha;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo==null? null : tipo.getCod();
+
+        setPerfis(Perfil.CLIENTE);
     }
 
     public Long getId() {
@@ -91,6 +104,14 @@ public class Cliente implements Serializable {
 
     public void setTelefone(Set<String> telefone) {
         this.telefone = telefone;
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void setPerfis(Perfil perfis) {
+        this.perfis.add(perfis.getCod());
     }
 
     public List<Endereco> getEnderecos() {
