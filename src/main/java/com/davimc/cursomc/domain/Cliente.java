@@ -1,8 +1,7 @@
 package com.davimc.cursomc.domain;
 
-import com.davimc.cursomc.enums.Perfil;
-import com.davimc.cursomc.enums.TipoCliente;
-
+import com.davimc.cursomc.domain.enums.Perfil;
+import com.davimc.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

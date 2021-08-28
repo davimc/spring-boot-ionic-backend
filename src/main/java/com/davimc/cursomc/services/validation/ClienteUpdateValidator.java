@@ -2,11 +2,8 @@ package com.davimc.cursomc.services.validation;
 
 import com.davimc.cursomc.domain.Cliente;
 import com.davimc.cursomc.dto.ClienteDTO;
-import com.davimc.cursomc.dto.ClienteNewDTO;
-import com.davimc.cursomc.enums.TipoCliente;
 import com.davimc.cursomc.repositories.ClienteRepository;
 import com.davimc.cursomc.resources.exceptions.FieldMessage;
-import com.davimc.cursomc.services.validation.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 

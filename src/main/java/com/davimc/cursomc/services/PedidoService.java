@@ -1,7 +1,7 @@
 package com.davimc.cursomc.services;
 
 import com.davimc.cursomc.domain.*;
-import com.davimc.cursomc.enums.EstadoPagamento;
+import com.davimc.cursomc.domain.enums.EstadoPagamento;
 import com.davimc.cursomc.repositories.ItemPedidoRepository;
 import com.davimc.cursomc.repositories.PagamentoRepository;
 import com.davimc.cursomc.repositories.PedidoRepository;

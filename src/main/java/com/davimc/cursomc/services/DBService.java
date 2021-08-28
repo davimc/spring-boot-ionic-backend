@@ -1,9 +1,9 @@
 package com.davimc.cursomc.services;
 
 import com.davimc.cursomc.domain.*;
-import com.davimc.cursomc.enums.EstadoPagamento;
-import com.davimc.cursomc.enums.Perfil;
-import com.davimc.cursomc.enums.TipoCliente;
+import com.davimc.cursomc.domain.enums.EstadoPagamento;
+import com.davimc.cursomc.domain.enums.Perfil;
+import com.davimc.cursomc.domain.enums.TipoCliente;
 import com.davimc.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,11 +77,11 @@ public class DBService {
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "davimc17@gmail.com", pe.encode("123"),"36378912377", TipoCliente.PESSOAFISICA);
+        Cliente cli1 = new Cliente(null, "Maria Silva", "davimc17@gmail.com", pe.encode("123"), "36378912377", TipoCliente.PESSOAFISICA);
 
         cli1.getTelefone().addAll(Arrays.asList("27363323", "93838393"));
 
-        Cliente cli2 = new Cliente(null, "Ana Maria", "davi.carvalho@acad.ifma.edu.br", pe.encode("123"),"85403200029", TipoCliente.PESSOAFISICA);
+        Cliente cli2 = new Cliente(null, "Ana Maria", "davi.carvalho@acad.ifma.edu.br", pe.encode("123"), "85403200029", TipoCliente.PESSOAFISICA);
         cli2.setPerfis(Perfil.ADMIN);
 
         cli2.getTelefone().addAll(Arrays.asList("33363933", "12348393"));

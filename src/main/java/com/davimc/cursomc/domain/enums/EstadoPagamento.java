@@ -1,14 +1,15 @@
-package com.davimc.cursomc.enums;
+package com.davimc.cursomc.domain.enums;
 
-public enum Perfil {
+public enum EstadoPagamento {
 
-    ADMIN(1,"ROLE_ADMIN"),
-    CLIENTE(2, "ROLE_CLIENTE");
+    PENDENTE(1,"Pendente"),
+    QUITADO(2, "Quitado"),
+    CANCELADO(3, "Cancelado");
 
     private int cod;
     private String descricao;
 
-    Perfil(int cod, String descricao) {
+    EstadoPagamento(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -28,13 +29,13 @@ public enum Perfil {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public static Perfil toEnum(Integer id) {
+    public static EstadoPagamento toEnum(Integer id) {
 
         if (id == null) {
             return null;
         }
 
-        for (Perfil x : Perfil.values()) {
+        for (EstadoPagamento x : EstadoPagamento.values()) {
             if (id.equals(x.getCod())) {
                 return x;
             }

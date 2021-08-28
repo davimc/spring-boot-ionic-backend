@@ -1,13 +1,11 @@
 package com.davimc.cursomc.services;
 
-import com.davimc.cursomc.config.SecurityConfig;
 import com.davimc.cursomc.domain.Cidade;
 import com.davimc.cursomc.domain.Cliente;
-import com.davimc.cursomc.domain.Cliente;
 import com.davimc.cursomc.domain.Endereco;
+import com.davimc.cursomc.domain.enums.TipoCliente;
 import com.davimc.cursomc.dto.ClienteDTO;
 import com.davimc.cursomc.dto.ClienteNewDTO;
-import com.davimc.cursomc.enums.TipoCliente;
 import com.davimc.cursomc.repositories.ClienteRepository;
 import com.davimc.cursomc.repositories.EnderecoRepository;
 import com.davimc.cursomc.services.exceptions.DataIntegrityException;

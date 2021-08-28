@@ -1,4 +1,4 @@
-package com.davimc.cursomc.enums;
+package com.davimc.cursomc.domain.enums;
 
 public enum TipoCliente {
     PESSOAFISICA(1, "Pessoa Física"),

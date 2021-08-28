@@ -1,6 +1,6 @@
 package com.davimc.cursomc.domain;
 
-import com.davimc.cursomc.enums.EstadoPagamento;
+import com.davimc.cursomc.domain.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
