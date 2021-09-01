@@ -1,5 +1,6 @@
 package com.davimc.cursomc.resources.exceptions;
 
+import com.davimc.cursomc.services.exceptions.AuthorizationException;
 import com.davimc.cursomc.services.exceptions.DataIntegrityException;
 import com.davimc.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -13,22 +14,29 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorizationException(AuthorizationException e, HttpServletRequest request) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
         StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
+
     @ExceptionHandler(DataIntegrityException.class)
     public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request) {
         StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
         ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
-        for(FieldError x: e.getBindingResult().getFieldErrors()){
-            err.setErrors(x.getField(),x.getDefaultMessage());
+        for (FieldError x : e.getBindingResult().getFieldErrors()) {
+            err.setErrors(x.getField(), x.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
