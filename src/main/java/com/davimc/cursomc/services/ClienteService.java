@@ -3,6 +3,7 @@ package com.davimc.cursomc.services;
 import com.davimc.cursomc.domain.Cidade;
 import com.davimc.cursomc.domain.Cliente;
 import com.davimc.cursomc.domain.Endereco;
+import com.davimc.cursomc.domain.Produto;
 import com.davimc.cursomc.domain.enums.TipoCliente;
 import com.davimc.cursomc.dto.ClienteDTO;
 import com.davimc.cursomc.dto.ClienteNewDTO;
@@ -94,5 +95,10 @@ public class ClienteService {
         newObj.setNome(obj.getNome());
         newObj.setEmail(obj.getEmail());
         return newObj;
+    }
+
+    public Cliente findByEmail(String email) {
+        return repo.findByEmail(email).orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + email + ", Tipo: " + Cliente.class.getName()));
     }
 }
