@@ -9,6 +9,7 @@ import com.davimc.cursomc.dto.ClienteNewDTO;
 import com.davimc.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,19 +24,21 @@ public class ClienteResource {
     private ClienteService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> find(@PathVariable Long id){
+    public ResponseEntity<Cliente> find(@PathVariable Long id) {
         Cliente obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO) {
         Cliente obj = service.fromDTO(objDTO);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO, @PathVariable long id) {
         Cliente obj = service.fromDTO(objDTO);
@@ -44,6 +47,7 @@ public class ClienteResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
         service.delete(id);
