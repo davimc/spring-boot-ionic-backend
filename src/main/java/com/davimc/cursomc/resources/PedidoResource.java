@@ -5,6 +5,7 @@ import com.davimc.cursomc.domain.Pedido;
 import com.davimc.cursomc.dto.CategoriaDTO;
 import com.davimc.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,6 +24,16 @@ public class PedidoResource {
     public ResponseEntity<Pedido> find(@PathVariable Long id){
         Pedido obj = service.find(id);
         return ResponseEntity.ok().body(obj);
+    }
+    @GetMapping
+    public ResponseEntity<Page<Pedido>> findPage(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "linesPerPage", defaultValue = "24") int linesPerPage,
+            @RequestParam(name = "orderBy", defaultValue = "instante") String orderBy,
+            @RequestParam(name = "direction", defaultValue = "DESC") String direction
+    ) {
+        Page<Pedido> list = service.findPage(page, linesPerPage, orderBy, direction);
+        return ResponseEntity.ok().body(list);
     }
 
     @PostMapping
