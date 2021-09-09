@@ -22,7 +22,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,11 +40,14 @@ public class ClienteService {
     @Autowired
     private BCryptPasswordEncoder pe;
 
+    @Autowired
+    private S3Service s3Service;
+
     public Cliente find(Long id) {
         UserSS user = UserService.authenticated();
-        if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
             throw new AuthorizationException("Acesso negado!");
-            Optional<Cliente> obj = repo.findById(id);
+        Optional<Cliente> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
@@ -108,5 +113,9 @@ public class ClienteService {
     public Cliente findByEmail(String email) {
         return repo.findByEmail(email).orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + email + ", Tipo: " + Cliente.class.getName()));
+    }
+
+    public URI uploadProfilePicture(MultipartFile multipartFile) {
+        return s3Service.uploadFile(multipartFile);
     }
 }
