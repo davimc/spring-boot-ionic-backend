@@ -122,13 +122,18 @@ public class ClienteService {
     }
 
     public Cliente findByEmail(String email) {
-        return repo.findByEmail(email).orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id: " + email + ", Tipo: " + Cliente.class.getName()));
+        UserSS user = UserService.authenticated();
+        if ((user == null || !user.hasRole(Perfil.ADMIN)) && !email.equals(user.getUsername()))
+            throw new AuthorizationException("Acesso negado");
+        Cliente obj = repo.findByEmail(email).orElseThrow(() ->
+                new ObjectNotFoundException("Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName()));
+
+        return obj;
     }
 
     public URI uploadProfilePicture(MultipartFile multipartFile) {
         UserSS user = UserService.authenticated();
-        if(user == null)
+        if (user == null)
             throw new AuthorizationException("Acesso negado");
         URI uri = s3Service.uploadFile(multipartFile);
 
